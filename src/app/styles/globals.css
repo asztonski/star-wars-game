@@ -6,6 +6,7 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+  --primary: 253, 224, 71;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -16,7 +17,8 @@
   }
 }
 
-html, body {
+html,
+body {
   height: 100%;
 }
 
@@ -28,5 +30,14 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
-    padding: 2rem;
+  padding: 2rem;
+}
+
+@layer components {
+  .text-stroke {
+    -webkit-text-stroke: 1px rgb(var(--primary));
+    text-stroke: 1px rgb(var(--primary));
+    text-shadow: none;
+    color: transparent;
+  }
 }

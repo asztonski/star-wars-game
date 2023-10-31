@@ -1,22 +1,25 @@
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-import './styles/globals.css'
+import type { Metadata } from "next";
+import { Roboto } from "next/font/google";
+import "./styles/globals.css";
+import AppContextProvider from "./context/AppContext";
 
-const inter = Inter({ subsets: ['latin'] })
+const roboto = Roboto({ subsets: ["latin"], weight: ["300", "500", "700"] });
 
 export const metadata: Metadata = {
-  title: 'Star Wars Game',
-  description: 'Star Wars Game',
-}
+  title: "Star Wars Game",
+  description: "Star Wars Game",
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <AppContextProvider>
+        <body className={roboto.className}>{children}</body>
+      </AppContextProvider>
     </html>
-  )
+  );
 }

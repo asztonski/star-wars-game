@@ -1,5 +1,4 @@
 // src/routes/swapi.ts
-
 import express from 'express';
 import axios from 'axios';
 
