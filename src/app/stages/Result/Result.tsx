@@ -4,12 +4,12 @@ import { useContext } from "react";
 import { AppContext } from "@/app/context/AppContext";
 
 export const Result = () => {
-  const { firstPlayerUnit, secondPlayerUnit } = useContext(AppContext);
+  const { firstPlayerUnit, secondPlayerUnit, players } = useContext(AppContext);
 
   return (
     <Wrapper title="Battle Results:">
-      <UnitDetails unit={firstPlayerUnit} player="Dominik" />
-      <UnitDetails unit={secondPlayerUnit} player="Przemek" />
+      <UnitDetails unit={firstPlayerUnit} player={players[0]} />
+      <UnitDetails unit={secondPlayerUnit} player={players.length > 1 ? players[1] : '[Computer] Galaxy Destroyer'} />
     </Wrapper>
   );
 };

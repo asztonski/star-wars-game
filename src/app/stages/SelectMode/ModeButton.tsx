@@ -14,7 +14,7 @@ export const ModeButton: React.FC<ModeButtonProps> = ({ title, id }) => {
     if (mode === 'single player') {
         setGameMode('single player')
     } else setGameMode('multi player')
-    setStage('select unit');
+    setStage('player name');
   };
 
   return (

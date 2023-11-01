@@ -6,6 +6,8 @@ type PageContextType = {
   setStage: React.Dispatch<React.SetStateAction<string>>;
   gameMode: string;
   setGameMode: React.Dispatch<React.SetStateAction<string>>;
+  players: object[];
+  setPlayers: React.Dispatch<React.SetStateAction<object[]>>;
   isSelected: boolean;
   setIsSelected: React.Dispatch<React.SetStateAction<boolean>>;
   firstPlayerUnit: string;
@@ -19,11 +21,12 @@ export const AppContext = createContext<PageContextType | undefined>(undefined);
 const AppContextProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const [ stage, setStage ] = useState('game mode')
-  const [ gameMode, setGameMode ] = useState('')
-  const [ isSelected, setIsSelected ] = useState(false)
-  const [ firstPlayerUnit, setFirstPlayerUnit ] = useState('');
-  const [ secondPlayerUnit, setSecondPlayerUnit ] = useState('');
+  const [stage, setStage] = useState("game mode");
+  const [gameMode, setGameMode] = useState("");
+  const [players, setPlayers] = useState<object[]>([]);
+  const [isSelected, setIsSelected] = useState(false);
+  const [firstPlayerUnit, setFirstPlayerUnit] = useState("");
+  const [secondPlayerUnit, setSecondPlayerUnit] = useState("");
 
   return (
     <AppContext.Provider
@@ -32,6 +35,8 @@ const AppContextProvider: React.FC<{ children: ReactNode }> = ({
         setStage,
         gameMode,
         setGameMode,
+        players,
+        setPlayers,
         isSelected,
         setIsSelected,
         firstPlayerUnit,

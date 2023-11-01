@@ -3,11 +3,11 @@ import { useContext } from "react";
 import { AppContext } from "@/app/context/AppContext";
 
 interface UnitButtonProps {
-  title: string;
+  fraction: string;
   id: string;
 }
 
-export const UnitButton: React.FC<UnitButtonProps> = ({ title, id }) => {
+export const UnitButton: React.FC<UnitButtonProps> = ({ fraction, id }) => {
   const { setStage, setFirstPlayerUnit, setSecondPlayerUnit } = useContext(AppContext);
 
   const onClickHandler = (unit: string) => {
@@ -29,7 +29,7 @@ export const UnitButton: React.FC<UnitButtonProps> = ({ title, id }) => {
             "text-5xl text-yellow-300 uppercase italic tracking-widest text-center"
           }
         >
-          {title}
+          {fraction}
         </h2>
       </CustomCard>
     </button>
