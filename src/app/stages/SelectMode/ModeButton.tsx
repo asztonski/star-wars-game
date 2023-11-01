@@ -2,23 +2,19 @@ import { CustomCard } from "../../components/Card/CustomCard";
 import { useContext } from "react";
 import { AppContext } from "@/app/context/AppContext";
 
-interface UnitButtonProps {
+interface ModeButtonProps {
   title: string;
   id: string;
 }
 
-export const UnitButton: React.FC<UnitButtonProps> = ({ title, id }) => {
-  const { setStage, setFirstPlayerUnit, setSecondPlayerUnit } = useContext(AppContext);
+export const ModeButton: React.FC<ModeButtonProps> = ({ title, id }) => {
+  const { setStage, setGameMode } = useContext(AppContext);
 
-  const onClickHandler = (unit: string) => {
-    setStage('result');
-    if (unit === 'Humans') {
-      setFirstPlayerUnit('Humans')
-      setSecondPlayerUnit('Starships')
-    } else {
-      setFirstPlayerUnit('Starships')
-      setSecondPlayerUnit('Humans')
-    }
+  const onClickHandler = (mode: string) => {
+    if (mode === 'single player') {
+        setGameMode('single player')
+    } else setGameMode('multi player')
+    setStage('select unit');
   };
 
   return (
