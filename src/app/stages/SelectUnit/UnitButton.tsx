@@ -8,17 +8,19 @@ interface UnitButtonProps {
 }
 
 export const UnitButton: React.FC<UnitButtonProps> = ({ fraction, id }) => {
-  const { setStage, setFirstPlayerUnit, setSecondPlayerUnit } = useContext(AppContext);
+  const { setStage, playersDetails, setPlayersDetails } = useContext(AppContext);
 
   const onClickHandler = (unit: string) => {
     setStage('result');
+    const updatedUnits = [...playersDetails];
     if (unit === 'Humans') {
-      setFirstPlayerUnit('Humans')
-      setSecondPlayerUnit('Starships')
+      updatedUnits[0].unit = 'Humans';
+      updatedUnits[1].unit = 'Starships';
     } else {
-      setFirstPlayerUnit('Starships')
-      setSecondPlayerUnit('Humans')
+      updatedUnits[0].unit = 'Starships';
+      updatedUnits[1].unit = 'Humans';
     }
+    setPlayersDetails(updatedUnits)
   };
 
   return (

@@ -8,29 +8,32 @@ interface NameInputProps {
   setIsPlayerSet: (isSet: boolean) => void;
 }
 
-type PlayerName = string;
-
 export const NameInput: React.FC<NameInputProps> = ({
   placeHolder,
   id,
   setIsPlayerSet,
 }) => {
-  const { setPlayers, setStage, gameMode } = useContext(AppContext);
-  const [inputValue, setInputValue] = useState("");
-  const [error, setError] = useState("");
+  const { playersDetails, setPlayersDetails, setStage, gameMode } = useContext(AppContext);
+  const [ inputValue, setInputValue ] = useState("");
+  const [ error, setError ] = useState("");
 
   const btnHandler = () => {
+    const updatedNames = [...playersDetails];
     if (inputValue.trim() !== "") {
-      if (gameMode === "single player") {
-        setPlayers((players: PlayerName[]) => [...players, inputValue]);
-        setStage("result");
-      } else {
-        setPlayers((players: PlayerName[]) => [...players, inputValue]);
-        if (id !== "player 1") {
-          setStage("result");
+      if (gameMode === "multi player") {
+        if (id === "player 1") {
+          updatedNames[0].name = inputValue;
+          setIsPlayerSet(true);
         }
-        setIsPlayerSet(true);
+        if (id === "player 2") {
+          updatedNames[1].name = inputValue
+          setStage('select unit')
+        }
+      } else {
+        updatedNames[0].name = inputValue;
+        setStage('select unit')
       }
+      setPlayersDetails(updatedNames)
       setError('')
     } else setError(`Please insert player's name`)
   };

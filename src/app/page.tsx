@@ -13,8 +13,22 @@ export default function Home() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("https://swapi.dev/api/people/1");
-        setApiData(response.data);
+        const randomPersonResponse = await axios.get(
+          "https://swapi.dev/api/people/"
+        );
+        const randomStarshipResponse = await axios.get(
+          "https://swapi.dev/api/starships/"
+        );
+
+        const randomPerson =
+          randomPersonResponse.data.results[
+            Math.floor(Math.random() * randomPersonResponse.data.count)
+          ];
+        const randomStarship =
+          randomStarshipResponse.data.results[
+            Math.floor(Math.random() * randomStarshipResponse.data.count)
+          ];
+        // setApiData(response.data);
         setLoading(false);
       } catch (error) {
         setLoading(false);
@@ -24,15 +38,15 @@ export default function Home() {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    console.log(apiData);
+  }, [apiData]);
+
   return (
     <main>
       <MainContainer>
         <Title />
-        {loading ? (
-          <Loading />
-        ) : (
-          <Content data={apiData} />
-        )}
+        {loading ? <Loading /> : <Content data={apiData} />}
       </MainContainer>
     </main>
   );
