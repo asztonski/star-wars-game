@@ -1,4 +1,4 @@
-import { CustomCard } from "../Card/CustomCard";
+import { CustomCard } from "../../components/Card/CustomCard";
 
 interface UnitProps {
   unit: string;

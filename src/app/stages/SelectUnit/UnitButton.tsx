@@ -1,4 +1,4 @@
-import { CustomCard } from "../Card/CustomCard";
+import { CustomCard } from "../../components/Card/CustomCard";
 import { useContext } from "react";
 import { AppContext } from "@/app/context/AppContext";
 
@@ -8,10 +8,10 @@ interface CardProps {
 }
 
 export const UnitButton: React.FC<CardProps> = ({ title, id }) => {
-  const { setIsSelected, setFirstPlayerUnit, setSecondPlayerUnit } = useContext(AppContext);
+  const { setStage, setFirstPlayerUnit, setSecondPlayerUnit } = useContext(AppContext);
 
   const onClickHandler = (unit: string) => {
-    setIsSelected(true);
+    setStage('result');
     if (unit === 'Humans') {
       setFirstPlayerUnit('Humans')
       setSecondPlayerUnit('Starships')

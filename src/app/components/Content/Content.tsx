@@ -1,5 +1,5 @@
-import { SelectUnit } from "../SelectUnit/SelectUnit";
-import { UnitDetails } from "../UnitDetails/UnitDetails";
+import { SelectUnit } from "../../stages/SelectUnit/SelectUnit";
+import { Result } from "@/app/stages/Result/Result";
 import { useContext } from "react";
 import { AppContext } from "@/app/context/AppContext";
 
@@ -8,17 +8,23 @@ interface ContentProps {
 }
 
 export const Content: React.FC<ContentProps> = ({ data }) => {
-  const { isSelected, firstPlayerUnit, secondPlayerUnit } = useContext(AppContext);
+  const { stage } =
+    useContext(AppContext);
+
+  const getContent = () => {
+    switch (stage) {
+      case ('select-unit'):
+        return <SelectUnit />
+      case ('result'):
+        return <Result />
+      default:
+        return
+    }
+  };
 
   return (
-    <div>
-      <SelectUnit />
-      {isSelected ? (
-        <div className={'flex gap-10'}>
-          <UnitDetails unit={firstPlayerUnit} player="Dominik" />
-          <UnitDetails unit={secondPlayerUnit} player="Przemek" />
-        </div>
-      ) : null}
+    <div className={"my-10"}>
+      {getContent()}
     </div>
   );
 };
