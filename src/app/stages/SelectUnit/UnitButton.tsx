@@ -14,11 +14,11 @@ export const UnitButton: React.FC<UnitButtonProps> = ({ fraction, id }) => {
     setStage('result');
     const updatedUnits = [...playersDetails];
     if (unit === 'Humans') {
-      updatedUnits[0].unit = 'Humans';
-      updatedUnits[1].unit = 'Starships';
+      updatedUnits[0].unit = 'humans';
+      updatedUnits[1].unit = 'starships';
     } else {
-      updatedUnits[0].unit = 'Starships';
-      updatedUnits[1].unit = 'Humans';
+      updatedUnits[0].unit = 'starships';
+      updatedUnits[1].unit = 'humans';
     }
     setPlayersDetails(updatedUnits)
   };

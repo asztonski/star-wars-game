@@ -6,10 +6,10 @@ import { SelectMode } from "@/app/stages/SelectMode/SelectMode";
 import { SelectName } from "@/app/stages/SelectName/SelectName";
 
 interface ContentProps {
-  data: any;
+  // data: any;
 }
 
-export const Content: React.FC<ContentProps> = ({ data }) => {
+export const Content: React.FC<ContentProps> = () => {
   const { stage } = useContext(AppContext);
 
   const getContent = () => {

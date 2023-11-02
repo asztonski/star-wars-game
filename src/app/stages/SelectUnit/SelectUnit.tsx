@@ -4,8 +4,8 @@ import { UnitButton } from "./UnitButton";
 export const SelectUnit = () => {
   return (
     <Wrapper title="Select your unit">
-      <UnitButton id="Humans" fraction="Humans" />
-      <UnitButton id="Starships" fraction="Starships" />
+      <UnitButton id="humans" fraction="Humans" />
+      <UnitButton id="starships" fraction="Starships" />
     </Wrapper>
   );
 };
