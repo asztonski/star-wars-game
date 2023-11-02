@@ -1,4 +1,3 @@
-// utils/swapi.ts
 const SWAPI_BASE_URL = 'https://swapi.dev/api';
 
 const fetchRandomResource = async (resource: string) => {
