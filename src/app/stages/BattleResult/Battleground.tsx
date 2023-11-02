@@ -19,10 +19,13 @@ export const Battleground = () => {
     try {
       const randomPerson = await fetchRandomPerson();
       const randomStarship = await fetchRandomStarship();
-
-      const personAsNumber = parseFloat(randomPerson.mass);
-      const starshipAsNumber = parseFloat(randomStarship.crew);
-
+  
+      const personMass = randomPerson.mass.replace('-', '');
+      const starshipCrew = randomStarship.crew.replace('-', '');
+  
+      const personAsNumber = parseFloat(personMass);
+      const starshipAsNumber = parseFloat(starshipCrew);
+  
       if (!isNaN(personAsNumber) && !isNaN(starshipAsNumber)) {
         setPerson(personAsNumber);
         setStarship(starshipAsNumber);
@@ -37,6 +40,7 @@ export const Battleground = () => {
       setLoading(false);
     }
   };
+  
 
   const handleFightClick = () => {
     fetchData();
@@ -54,14 +58,20 @@ export const Battleground = () => {
         } else {
           setWinner("starships");
         }
-        if (player1.unit === winner) {
-          player1.score++;
-        } else {
-          player2.score++;
-        }
       }
     }
   }, [dataFetched, person, starship]);
+
+  useEffect(() => {
+    if (winner !== null) {
+      if (player1.unit === winner) {
+        player1.score++;
+      }
+      if (player2.unit === winner) {
+        player2.score++;
+      }
+    }
+  }, [winner]);
 
   return (
     <Wrapper title="Battleground">
