@@ -8,7 +8,7 @@ export const SelectName = () => {
   const [ isPlayerSet, setIsPlayerSet ] = useState(false);
 
   return (
-    <Wrapper title="Please insert your name">
+    <Wrapper title={`${isPlayerSet ? 'Player 2 name:' : 'Player 1 name:'}`}>
       {!isPlayerSet ? (
         <NameInput
           setIsPlayerSet={setIsPlayerSet}

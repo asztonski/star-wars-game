@@ -1,15 +1,11 @@
 import { SelectUnit } from "../../stages/SelectUnit/SelectUnit";
-import { Result } from "@/app/stages/Result/Result";
+import { Battleground } from "@/app/stages/BattleResult/Battleground";
 import { useContext } from "react";
 import { AppContext } from "@/app/context/AppContext";
 import { SelectMode } from "@/app/stages/SelectMode/SelectMode";
 import { SelectName } from "@/app/stages/SelectName/SelectName";
 
-interface ContentProps {
-  // data: any;
-}
-
-export const Content: React.FC<ContentProps> = () => {
+export const Content = () => {
   const { stage } = useContext(AppContext);
 
   const getContent = () => {
@@ -21,7 +17,7 @@ export const Content: React.FC<ContentProps> = () => {
       case "select unit":
         return <SelectUnit />;
       case "result":
-        return <Result />;
+        return <Battleground />;
       default:
         return;
     }

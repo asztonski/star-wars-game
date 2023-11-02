@@ -1,4 +1,4 @@
-import { CustomCard } from "../../components/Card/CustomCard";
+import { Button } from "@/app/components/Button/Button";
 import { useContext } from "react";
 import { AppContext } from "@/app/context/AppContext";
 
@@ -18,8 +18,7 @@ export const ModeButton: React.FC<ModeButtonProps> = ({ title, id }) => {
   };
 
   return (
-    <button className={"w-1/2 ease-[ease] duration-[0.34s] hover:scale-110"} onClick={() => onClickHandler(id)}>
-      <CustomCard>
+    <Button onClick={() => onClickHandler(id)}>
         <h2
           className={
             "text-5xl text-yellow-300 uppercase italic tracking-widest text-center"
@@ -27,7 +26,6 @@ export const ModeButton: React.FC<ModeButtonProps> = ({ title, id }) => {
         >
           {title}
         </h2>
-      </CustomCard>
-    </button>
+    </Button>
   );
 };
