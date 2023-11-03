@@ -33,6 +33,26 @@ body {
   padding: 2rem;
 }
 
+@keyframes bounce {
+  0%,50%,100% {
+    transform: scale(1) rotate(0deg);
+  }
+  25% {
+    transform: scale(1.05) rotate(-2.5deg);
+  }
+  75% {
+    transform: scale(0.95) rotate(2.5deg);
+  }
+}
+
+.bounce {
+  animation: bounce 1s linear infinite;
+}
+
+.disabled {
+  pointer-events: none;
+}
+
 @layer components {
   .text-stroke {
     -webkit-text-stroke: 1px rgb(var(--primary));

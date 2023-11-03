@@ -41,17 +41,6 @@ export const Battleground = () => {
     }
   };
 
-  useEffect(() => {
-    if (dataFetched) {
-      if (player1.unit === winner) {
-        player1.score++;
-      }
-      if (player2.unit === winner) {
-        player2.score++;
-      }
-    }
-  });
-
   const handleFightClick = () => {
     fetchData();
   };
@@ -71,16 +60,25 @@ export const Battleground = () => {
     }
   }, [dataFetched, person, starship]);
 
+  useEffect(() => {
+    if (winner !== null) {
+      if (player1.unit === winner) {
+        player1.score++;
+      }
+      if (player2.unit === winner) {
+        player2.score++;
+      }
+    }
+  }, [winner]);
+
   return (
     <Wrapper title="Battleground">
-      <div className="flex flex-col my-5">
-        <h4 className="uppercase text-5xl text-center text-primary">
-          {winner ? (
+      <div className={"flex flex-col my-5"}>
+        <h4 className={`uppercase text-5xl text-center ${loading ? 'bounce' : ''} text-primary`}>
+          {winner && !loading ? (
             <>
               <span
-                className={
-                  winner === "humans" ? "text-human" : "text-starship"
-                }
+                className={winner === "humans" ? "text-human" : "text-starship"}
               >
                 {winner}
               </span>{" "}
@@ -91,7 +89,7 @@ export const Battleground = () => {
           )}
         </h4>
 
-        <div className="flex mt-10 gap-8">
+        <div className={"flex mt-10 gap-8"}>
           {playersDetails.map((player: any, index: number) => (
             <UnitDetails
               key={index}
@@ -107,7 +105,7 @@ export const Battleground = () => {
             />
           ))}
         </div>
-        <div className="w-1/3 m-auto mt-20">
+        <div className={`w-1/3 m-auto mt-20 ${loading ? 'bounce disabled' : ''}`}>
           <Button
             content={loading ? "Units are landing..." : "Fight!"}
             onClick={handleFightClick}
