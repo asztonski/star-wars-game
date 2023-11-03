@@ -56,7 +56,7 @@ export const NameInput: React.FC<NameInputProps> = ({
         <button
           onClick={btnHandler}
           className={
-            "px-6 py-4 rounded-md bg-primary text-cyan-900 w-full uppercase font-black"
+            "px-6 py-4 rounded-md bg-primary text-secondary w-full uppercase font-black"
           }
         >
           Ok

@@ -9,7 +9,7 @@ export const Button: React.FC<ButtonProps> = ({ children, onClick, content }) =>
   return (
     <button
       onClick={onClick}
-      className={`ease-[ease] duration-[0.34s] rounded-xl hover:scale-110 bg-cyan-900 p-10 flex justify-center items-center w-full uppercase`}
+      className={`ease-[ease] duration-[0.34s] rounded-xl hover:scale-110 bg-secondary p-10 flex justify-center items-center w-full uppercase`}
     >
       {children ? children : <p className={'text-primary text-2xl'}>{content}</p>}
     </button>
