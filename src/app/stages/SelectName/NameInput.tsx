@@ -47,9 +47,9 @@ export const NameInput: React.FC<NameInputProps> = ({
     setInputValue(event.target.value);
   };
 
-  const TextInput = () => {
-    return (
-      <>
+  return (
+    <CustomCard>
+      <div className={"flex flex-col gap-4 w-1/2 items-center"}>
         <input
           className="w-full p-3"
           placeholder={placeHolder}
@@ -58,16 +58,10 @@ export const NameInput: React.FC<NameInputProps> = ({
           onChange={handleInputChange}
         />
         <p className={"text-red-600"}>{error}</p>
-      </>
-    );
-  };
-
-  return (
-    <CustomCard>
-      <div className={"flex flex-col gap-4 w-1/2 items-center"}>
-        <TextInput />
-        <div className={'w-1/2'}>
-          <Button primaryStyle onClick={btnHandler}>Ok</Button>
+        <div className={"w-1/2"}>
+          <Button primaryStyle onClick={btnHandler}>
+            Ok
+          </Button>
         </div>
       </div>
     </CustomCard>

@@ -17,7 +17,7 @@ export const ModeButton: React.FC<ModeButtonProps> = ({ title, id }) => {
   };
 
   return (
-    <Button onClick={() => setGameModeHandler(id)}>
+    <Button secondaryStyle onClick={() => setGameModeHandler(id)}>
         <h2
           className={
             "text-5xl text-primary uppercase italic tracking-widest text-center"
