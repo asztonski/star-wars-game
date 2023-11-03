@@ -74,12 +74,12 @@ export const Battleground = () => {
   return (
     <Wrapper title="Battleground">
       <div className="flex flex-col my-5">
-        <h4 className="uppercase text-5xl text-center text-yellow-300">
+        <h4 className="uppercase text-5xl text-center text-primary">
           {winner ? (
             <>
               <span
                 className={
-                  winner === "humans" ? "text-teal-300" : "text-red-500"
+                  winner === "humans" ? "text-human" : "text-starship"
                 }
               >
                 {winner}

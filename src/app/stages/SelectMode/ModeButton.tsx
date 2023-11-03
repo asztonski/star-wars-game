@@ -21,7 +21,7 @@ export const ModeButton: React.FC<ModeButtonProps> = ({ title, id }) => {
     <Button onClick={() => onClickHandler(id)}>
         <h2
           className={
-            "text-5xl text-yellow-300 uppercase italic tracking-widest text-center"
+            "text-5xl text-primary uppercase italic tracking-widest text-center"
           }
         >
           {title}
