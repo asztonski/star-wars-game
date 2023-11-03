@@ -6,6 +6,7 @@ interface UnitProps {
   player: string;
   score: number;
   power: any;
+  isReady: boolean;
 }
 
 export const UnitDetails: React.FC<UnitProps> = ({
@@ -13,6 +14,7 @@ export const UnitDetails: React.FC<UnitProps> = ({
   player,
   score,
   power,
+  isReady,
 }) => {
 
   return (
@@ -26,11 +28,11 @@ export const UnitDetails: React.FC<UnitProps> = ({
             "text-2xl my-4 text-yellow-300 uppercase tracking-widest text-center"
           }
         >
-          {player + `'s`} unit: {unit}
+          {player + `'s`} unit: <span className={`${unit === 'humans' ? 'text-teal-300' : 'text-red-500'}`}>{unit}</span>
         </h3>
-        <span className={`text-2xl py-4 text-white px-8 uppercase ${unit === 'humans' ? 'bg-teal-300' : 'bg-red-500'}`}>
+        {isReady ? <span className={`text-2xl py-4 text-white px-8 uppercase ${unit === 'humans' ? 'bg-teal-300' : 'bg-red-500'}`}>
           {power}
-        </span>
+        </span> : null}
       </div>
     </CustomCard>
   );

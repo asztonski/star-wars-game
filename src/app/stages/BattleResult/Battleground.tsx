@@ -19,13 +19,13 @@ export const Battleground = () => {
     try {
       const randomPerson = await fetchRandomPerson();
       const randomStarship = await fetchRandomStarship();
-  
-      const personMass = randomPerson.mass.replace('-', '');
-      const starshipCrew = randomStarship.crew.replace('-', '');
-  
+
+      const personMass = randomPerson.mass.replace("-", "");
+      const starshipCrew = randomStarship.crew.replace("-", "");
+
       const personAsNumber = parseFloat(personMass);
       const starshipAsNumber = parseFloat(starshipCrew);
-  
+
       if (!isNaN(personAsNumber) && !isNaN(starshipAsNumber)) {
         setPerson(personAsNumber);
         setStarship(starshipAsNumber);
@@ -40,7 +40,17 @@ export const Battleground = () => {
       setLoading(false);
     }
   };
-  
+
+  useEffect(() => {
+    if (dataFetched) {
+      if (player1.unit === winner) {
+        player1.score++;
+      }
+      if (player2.unit === winner) {
+        player2.score++;
+      }
+    }
+  });
 
   const handleFightClick = () => {
     fetchData();
@@ -49,7 +59,6 @@ export const Battleground = () => {
   const player1 = playersDetails[0];
   const player2 = playersDetails[1];
 
-  // Update useEffect to check the dataFetched flag
   useEffect(() => {
     if (dataFetched) {
       if (person !== null && starship !== null) {
@@ -61,17 +70,6 @@ export const Battleground = () => {
       }
     }
   }, [dataFetched, person, starship]);
-
-  useEffect(() => {
-    if (winner !== null) {
-      if (player1.unit === winner) {
-        player1.score++;
-      }
-      if (player2.unit === winner) {
-        player2.score++;
-      }
-    }
-  }, [winner]);
 
   return (
     <Wrapper title="Battleground">
@@ -94,27 +92,20 @@ export const Battleground = () => {
         </h4>
 
         <div className="flex mt-10 gap-8">
-          <UnitDetails
-            score={playersDetails[0].score}
-            unit={playersDetails[0].unit}
-            player={playersDetails[0].name}
-            power={
-              playersDetails[0].unit === "humans"
-                ? `mass: ${person}`
-                : `crew: ${starship}`
-            }
-          />
-          <span className="text-5xl self-center">VS</span>
-          <UnitDetails
-            score={playersDetails[1].score}
-            unit={playersDetails[1].unit}
-            player={playersDetails[1].name || "[Computer] Galaxy Destroyer"}
-            power={
-              playersDetails[1].unit === "humans"
-                ? `mass: ${person}`
-                : `crew: ${starship}`
-            }
-          />
+          {playersDetails.map((player: any, index: number) => (
+            <UnitDetails
+              key={index}
+              score={player.score}
+              unit={player.unit}
+              player={player.name || "[Computer] Galaxy Destroyer"}
+              isReady={dataFetched}
+              power={
+                player.unit === "humans"
+                  ? `mass: ${person}`
+                  : `crew: ${starship}`
+              }
+            />
+          ))}
         </div>
         <div className="w-1/3 m-auto mt-20">
           <Button
