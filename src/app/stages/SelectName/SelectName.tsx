@@ -1,7 +1,7 @@
-import { Wrapper } from "@/app/components/Container/Wrapper";
-import { NameInput } from "./NameInput";
 import { useContext, useState } from "react";
 import { AppContext } from "@/app/context/AppContext";
+import { Wrapper } from "@/app/components/Container/Wrapper";
+import { NameInput } from "./NameInput";
 
 export const SelectName = () => {
   const { gameMode } = useContext(AppContext);

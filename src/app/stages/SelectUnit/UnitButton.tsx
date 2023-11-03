@@ -1,6 +1,6 @@
-import { Button } from "@/app/components/Button/Button";
 import { useContext } from "react";
 import { AppContext } from "@/app/context/AppContext";
+import { Button } from "@/app/components/Button/Button";
 
 interface UnitButtonProps {
   fraction: string;
@@ -10,10 +10,10 @@ interface UnitButtonProps {
 export const UnitButton: React.FC<UnitButtonProps> = ({ fraction, id }) => {
   const { setStage, playersDetails, setPlayersDetails } = useContext(AppContext);
 
-  const onClickHandler = (unit: string) => {
+  const onClickHandler = (selectedUnit: string) => {
     setStage('result');
     const updatedUnits = [...playersDetails];
-    if (unit === 'Humans') {
+    if (selectedUnit === 'Humans') {
       updatedUnits[0].unit = 'humans';
       updatedUnits[1].unit = 'starships';
     } else {
@@ -24,7 +24,7 @@ export const UnitButton: React.FC<UnitButtonProps> = ({ fraction, id }) => {
   };
 
   return (
-    <Button onClick={() => onClickHandler(id)}>
+    <Button secondaryStyle onClick={() => onClickHandler(id)}>
         <h2
           className={
             "text-5xl text-primary uppercase italic tracking-widest text-center"

@@ -10,15 +10,14 @@ interface ModeButtonProps {
 export const ModeButton: React.FC<ModeButtonProps> = ({ title, id }) => {
   const { setStage, setGameMode } = useContext(AppContext);
 
-  const onClickHandler = (mode: string) => {
-    if (mode === 'single player') {
-        setGameMode('single player')
-    } else setGameMode('multi player')
-    setStage('player name');
+  const setGameModeHandler = (mode: string) => {
+    const gameMode = mode === "single player" ? "single player" : "multi player";
+    setGameMode(gameMode);
+    setStage("player name");
   };
 
   return (
-    <Button onClick={() => onClickHandler(id)}>
+    <Button onClick={() => setGameModeHandler(id)}>
         <h2
           className={
             "text-5xl text-primary uppercase italic tracking-widest text-center"

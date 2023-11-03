@@ -1,7 +1,6 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AppContext } from "@/app/context/AppContext";
 import { fetchRandomPerson, fetchRandomStarship } from "../../utils/swapi";
-import { Loading } from "@/app/components/Loading/Loading";
 import { Wrapper } from "@/app/components/Container/Wrapper";
 import { UnitDetails } from "./UnitDetails";
 import { Button } from "@/app/components/Button/Button";
@@ -71,10 +70,9 @@ export const Battleground = () => {
     }
   }, [winner]);
 
-  return (
-    <Wrapper title="Battleground">
-      <div className={"flex flex-col my-5"}>
-        <h4 className={`uppercase text-5xl text-center ${loading ? 'bounce' : ''} text-primary`}>
+  const Title = () => {
+    return (
+      <h4 className={`uppercase text-5xl text-center ${loading ? 'bounce' : ''} text-primary`}>
           {winner && !loading ? (
             <>
               <span
@@ -88,8 +86,12 @@ export const Battleground = () => {
             "Prepare for battle!"
           )}
         </h4>
+    )
+  }
 
-        <div className={"flex flex-col md:flex-row mt-10 gap-8"}>
+  const UnitsWrapper = () => {
+    return (
+      <div className={"flex flex-col md:flex-row mt-10 gap-8"}>
           {playersDetails.map((player: any, index: number) => (
             <UnitDetails
               key={index}
@@ -105,12 +107,26 @@ export const Battleground = () => {
             />
           ))}
         </div>
-        <div className={`md:w-1/3 m-auto mt-20 ${loading ? 'bounce disabled' : ''}`}>
-          <Button
+    )
+  }
+
+  const BattleButton = () => {
+    return (
+      <div className={`md:w-1/3 m-auto mt-20 ${loading ? 'bounce disabled' : ''}`}>
+          <Button primaryStyle
             content={loading ? "Units are landing..." : "Fight!"}
             onClick={handleFightClick}
           />
         </div>
+    )
+  }
+
+  return (
+    <Wrapper title="Battleground">
+    <div className={"flex flex-col my-5"}>
+        <Title />
+        <UnitsWrapper />
+        <BattleButton />
       </div>
     </Wrapper>
   );

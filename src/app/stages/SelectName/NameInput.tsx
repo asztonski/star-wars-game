@@ -1,6 +1,7 @@
-import { CustomCard } from "@/app/components/Card/CustomCard";
 import { useContext, useState } from "react";
 import { AppContext } from "@/app/context/AppContext";
+import { CustomCard } from "@/app/components/Card/CustomCard";
+import { Button } from "@/app/components/Button/Button";
 
 interface NameInputProps {
   placeHolder: string;
@@ -13,38 +14,42 @@ export const NameInput: React.FC<NameInputProps> = ({
   id,
   setIsPlayerSet,
 }) => {
-  const { playersDetails, setPlayersDetails, setStage, gameMode } = useContext(AppContext);
-  const [ inputValue, setInputValue ] = useState("");
-  const [ error, setError ] = useState("");
+  const { playersDetails, setPlayersDetails, setStage, gameMode } =
+    useContext(AppContext);
+  const [inputValue, setInputValue] = useState("");
+  const [error, setError] = useState("");
 
   const btnHandler = () => {
     const updatedNames = [...playersDetails];
-    if (inputValue.trim() !== "") {
-      if (gameMode === "multi player") {
+    const isInputEmpty = inputValue.trim() === "";
+    const isMultiPlayer = gameMode === "multi player";
+
+    if (!isInputEmpty) {
+      if (isMultiPlayer) {
         if (id === "player 1") {
           updatedNames[0].name = inputValue;
           setIsPlayerSet(true);
         }
         if (id === "player 2") {
-          updatedNames[1].name = inputValue
-          setStage('select unit')
+          updatedNames[1].name = inputValue;
+          setStage("select unit");
         }
       } else {
         updatedNames[0].name = inputValue;
-        setStage('select unit')
+        setStage("select unit");
       }
-      setPlayersDetails(updatedNames)
-      setError('')
-    } else setError(`Please insert player's name`)
+      setPlayersDetails(updatedNames);
+      setError("");
+    } else setError(`Please insert player's name`);
   };
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
   };
 
-  return (
-    <CustomCard>
-      <div className={"flex flex-col gap-4 w-1/2 items-center"}>
+  const TextInput = () => {
+    return (
+      <>
         <input
           className="w-full p-3"
           placeholder={placeHolder}
@@ -52,15 +57,18 @@ export const NameInput: React.FC<NameInputProps> = ({
           value={inputValue}
           onChange={handleInputChange}
         />
-        <p className={'text-red-600'}>{error}</p>
-        <button
-          onClick={btnHandler}
-          className={
-            "px-6 py-4 rounded-md bg-primary text-secondary w-full uppercase font-black"
-          }
-        >
-          Ok
-        </button>
+        <p className={"text-red-600"}>{error}</p>
+      </>
+    );
+  };
+
+  return (
+    <CustomCard>
+      <div className={"flex flex-col gap-4 w-1/2 items-center"}>
+        <TextInput />
+        <div className={'w-1/2'}>
+          <Button primaryStyle onClick={btnHandler}>Ok</Button>
+        </div>
       </div>
     </CustomCard>
   );
