@@ -6,5 +6,5 @@ interface MainContainerProps {
 }
 
 export const MainContainer: React.FC<MainContainerProps> = ({ children }) => {
-  return <Container className={'bg-accent p-6 rounded-md'} maxWidth='md'>{children}</Container>;
+  return <Container className={'bg-accent p-6 rounded-md relative'} maxWidth='md'>{children}</Container>;
 };

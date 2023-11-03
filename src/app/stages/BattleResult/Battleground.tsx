@@ -1,30 +1,55 @@
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "@/app/context/AppContext";
-import { fetchData } from "../../helpers/getPowerData";
+import { fetchData } from "@/app/helpers/getPowerData";
 import { Wrapper } from "@/app/components/Container/Wrapper";
 import { UnitDetails } from "./UnitDetails";
 import { Button } from "@/app/components/Button/Button";
 
 export const Battleground = () => {
-  const { playersDetails } = useContext(AppContext);
+  const { playersDetails, resetGame } = useContext(AppContext);
   const [person, setPerson] = useState<number | null>(null);
   const [starship, setStarship] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
   const [winner, setWinner] = useState<string | null>(null);
   const [dataFetched, setDataFetched] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const fetchDataWithTimeout = async () => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      const timeout = 10000;
+
+      const { person, starship } = await Promise.race([
+        fetchData(),
+        new Promise((_, reject) =>
+          setTimeout(() => reject(new Error("Data fetch timed out")), timeout)
+        ),
+      ]);
+
+      if (person !== null && starship !== null) {
+        setPerson(person);
+        setStarship(starship);
+        setWinner(null);
+        setDataFetched(true);
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      setError(
+        "Battleground has been destroyed. Please start battle on another planet."
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleFightClick = async () => {
-    setLoading(true);
-    const { person, starship } = await fetchData();
-
-    if (person !== null && starship !== null) {
-      setPerson(person);
-      setStarship(starship);
-      setWinner(null);
-      setDataFetched(true);
-    }
-    setLoading(false);
+    fetchDataWithTimeout();
   };
+
+  const player1 = playersDetails[0];
+  const player2 = playersDetails[1];
 
   useEffect(() => {
     if (dataFetched) {
@@ -39,8 +64,6 @@ export const Battleground = () => {
   }, [dataFetched, person, starship]);
 
   useEffect(() => {
-    const player1 = playersDetails[0];
-    const player2 = playersDetails[1];
     if (winner !== null) {
       if (player1.unit === winner) {
         player1.score++;
@@ -93,7 +116,7 @@ export const Battleground = () => {
     );
   };
 
-  const BattleButton = () => {
+  const ButtonWrapper = () => {
     return (
       <div
         className={`md-w-1/3 m-auto mt-20 ${loading ? "bounce disabled" : ""}`}
@@ -109,10 +132,14 @@ export const Battleground = () => {
 
   return (
     <Wrapper title="Battleground">
+      <div className={'absolute bottom-5 right-5'}>
+        <Button secondaryStyle content="New game" onClick={() => resetGame()} />
+      </div>
       <div className={"flex flex-col my-5"}>
         <Title />
         <UnitsWrapper />
-        <BattleButton />
+        {error ? <p className="text-red-600">{error}</p> : null}
+        <ButtonWrapper />
       </div>
     </Wrapper>
   );

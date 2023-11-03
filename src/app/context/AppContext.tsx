@@ -10,6 +10,7 @@ type PageContextType = {
   setPlayersDetails: React.Dispatch<React.SetStateAction<object[]>>;
   isSelected: boolean;
   setIsSelected: React.Dispatch<React.SetStateAction<boolean>>;
+  resetGame: () => void;
 };
 
 export const AppContext = createContext<PageContextType | undefined>(undefined);
@@ -25,6 +26,16 @@ const AppContextProvider: React.FC<{ children: ReactNode }> = ({
   ]);
   const [isSelected, setIsSelected] = useState<boolean>(false);
 
+  const resetGame = () => {
+    setStage("game mode");
+    setGameMode("");
+    setPlayersDetails([
+      { name: null, unit: null, score: 0 },
+      { name: null, unit: null, score: 0 }
+    ]);
+    setIsSelected(false);
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -36,6 +47,7 @@ const AppContextProvider: React.FC<{ children: ReactNode }> = ({
         setPlayersDetails,
         isSelected,
         setIsSelected,
+        resetGame,
       }}
     >
       {children}
