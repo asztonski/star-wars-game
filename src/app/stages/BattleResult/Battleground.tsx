@@ -89,7 +89,7 @@ export const Battleground = () => {
           )}
         </h4>
 
-        <div className={"flex mt-10 gap-8"}>
+        <div className={"flex flex-col md:flex-row mt-10 gap-8"}>
           {playersDetails.map((player: any, index: number) => (
             <UnitDetails
               key={index}
@@ -105,7 +105,7 @@ export const Battleground = () => {
             />
           ))}
         </div>
-        <div className={`w-1/3 m-auto mt-20 ${loading ? 'bounce disabled' : ''}`}>
+        <div className={`md:w-1/3 m-auto mt-20 ${loading ? 'bounce disabled' : ''}`}>
           <Button
             content={loading ? "Units are landing..." : "Fight!"}
             onClick={handleFightClick}
