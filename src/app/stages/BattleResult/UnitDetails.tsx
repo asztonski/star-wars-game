@@ -30,7 +30,7 @@ export const UnitDetails: React.FC<UnitProps> = ({
           "text-2xl my-4 text-primary uppercase tracking-widest text-center"
         }
       >
-        {player + `'s`} unit:{" "}
+        {player + `'s`} unit:<br />{" "}
         <span
           className={`${unit === "humans" ? "text-human" : "text-starship"}`}
         >
