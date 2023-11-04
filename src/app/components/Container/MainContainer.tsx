@@ -2,7 +2,7 @@ import { Container } from "@mui/material";
 import { ReactNode } from "react";
 
 interface MainContainerProps {
-  children: ReactNode;
+  children: ReactNode,
 }
 
 export const MainContainer: React.FC<MainContainerProps> = ({ children }) => {

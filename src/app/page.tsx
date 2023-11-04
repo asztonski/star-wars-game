@@ -7,9 +7,8 @@ export default function Home() {
 
   return (
     <main>
-      dupa
       <MainContainer>
-        <Title />
+        <Title content="Star wars<br />game" />
         <Content />
       </MainContainer>
     </main>

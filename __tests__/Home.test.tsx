@@ -1,11 +1,23 @@
-import { render, screen } from '@testing-library/react'
-import Home from '@/app/page'
+import React from 'react';
+import { render, screen } from '@testing-library/react';
+import Home from '../src/app/page';
 
-it('should have dupa text', () => {
-    // AAA Pattern
-    render(<Home />) // Arange
+describe('Home Component', () => {
+  it('should contain Title and Content components within MainContainer', () => {
+    render(<Home />); // Arrange and Act
 
-    const myElem = screen.getByText('dupa') // Action
+    // Use screen to select elements by their type (i.e., component name)
+    const mainContainer = screen.getByRole('main container');
+    const title = screen.getByRole('main title');
+    const content = screen.getByRole('main content');
 
-    expect(myElem).toBeInTheDocument() // Assert
-})
+    // Assertions
+    expect(mainContainer).toBeInTheDocument();
+    expect(title).toBeInTheDocument();
+    expect(content).toBeInTheDocument();
+
+    // Check that Title and Content components are nested within MainContainer
+    expect(mainContainer).toContainElement(title);
+    expect(mainContainer).toContainElement(content);
+  });
+});
