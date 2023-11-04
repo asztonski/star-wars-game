@@ -6,13 +6,42 @@ import { UnitDetails } from "./UnitDetails";
 import { Button } from "@/app/components/Button/Button";
 
 export const Battleground = () => {
-  const { playersDetails, resetGame } = useContext(AppContext);
   const [person, setPerson] = useState<number | null>(null);
   const [starship, setStarship] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
   const [winner, setWinner] = useState<string | null>(null);
   const [dataFetched, setDataFetched] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (dataFetched) {
+      if (person !== null && starship !== null) {
+        if (person > starship) {
+          setWinner("humans");
+        } else {
+          setWinner("starships");
+        }
+      }
+    }
+  }, [dataFetched, person, starship]);
+
+  useEffect(() => {
+    if (winner !== null) {
+      if (player1.unit === winner) {
+        player1.score++;
+      }
+      if (player2.unit === winner) {
+        player2.score++;
+      }
+    }
+  }, [winner]);
+
+  const appContext = useContext(AppContext);
+    if (!appContext) return null;
+  const { playersDetails, resetGame } = appContext;
+
+  const player1 = playersDetails[0];
+  const player2 = playersDetails[1];
 
   const fetchDataWithTimeout = async () => {
     setLoading(true);
@@ -47,32 +76,6 @@ export const Battleground = () => {
   const handleFightClick = async () => {
     fetchDataWithTimeout();
   };
-
-  const player1 = playersDetails[0];
-  const player2 = playersDetails[1];
-
-  useEffect(() => {
-    if (dataFetched) {
-      if (person !== null && starship !== null) {
-        if (person > starship) {
-          setWinner("humans");
-        } else {
-          setWinner("starships");
-        }
-      }
-    }
-  }, [dataFetched, person, starship]);
-
-  useEffect(() => {
-    if (winner !== null) {
-      if (player1.unit === winner) {
-        player1.score++;
-      }
-      if (player2.unit === winner) {
-        player2.score++;
-      }
-    }
-  }, [winner]);
 
   const Title = () => {
     return (

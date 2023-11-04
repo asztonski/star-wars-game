@@ -14,10 +14,13 @@ export const NameInput: React.FC<NameInputProps> = ({
   id,
   setIsPlayerSet,
 }) => {
-  const { playersDetails, setPlayersDetails, setStage, gameMode } =
-    useContext(AppContext);
   const [inputValue, setInputValue] = useState("");
   const [error, setError] = useState("");
+
+  const appContext = useContext(AppContext);
+
+  if (!appContext) return null;
+  const { playersDetails, setPlayersDetails, setStage, gameMode } = appContext;
 
   const btnHandler = () => {
     const updatedNames = [...playersDetails];

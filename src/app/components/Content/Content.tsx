@@ -6,18 +6,21 @@ import { SelectMode } from "@/app/stages/SelectMode/SelectMode";
 import { SelectName } from "@/app/stages/SelectName/SelectName";
 
 export const Content = () => {
-  const { stage } = useContext(AppContext);
+  const appContext = useContext(AppContext);
+
+  if (!appContext) return null;
+  const { stage } = appContext;
 
   const getContent = () => {
     switch (stage) {
       case "game mode":
-        return <SelectMode />;
+        return <SelectMode appContext={appContext} />;
       case "player name":
-        return <SelectName />
+        return <SelectName appContext={appContext} />
       case "select unit":
-        return <SelectUnit />;
+        return <SelectUnit appContext={appContext} />;
       case "result":
-        return <Battleground />;
+        return <Battleground appContext={appContext} />;
       default:
         return;
     }

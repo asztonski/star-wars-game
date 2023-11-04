@@ -8,23 +8,27 @@ interface ModeButtonProps {
 }
 
 export const ModeButton: React.FC<ModeButtonProps> = ({ title, id }) => {
-  const { setStage, setGameMode } = useContext(AppContext);
+  const appContext = useContext(AppContext);
+
+  if (!appContext) return null;
+  const { setStage, setGameMode } = appContext;
 
   const setGameModeHandler = (mode: string) => {
-    const gameMode = mode === "single player" ? "single player" : "multi player";
+    const gameMode =
+      mode === "single player" ? "single player" : "multi player";
     setGameMode(gameMode);
     setStage("player name");
   };
 
   return (
     <Button secondaryStyle onClick={() => setGameModeHandler(id)}>
-        <h2
-          className={
-            "text-5xl text-primary uppercase italic tracking-widest text-center"
-          }
-        >
-          {title}
-        </h2>
+      <h2
+        className={
+          "text-5xl text-primary uppercase italic tracking-widest text-center"
+        }
+      >
+        {title}
+      </h2>
     </Button>
   );
 };

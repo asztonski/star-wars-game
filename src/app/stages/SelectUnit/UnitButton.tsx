@@ -8,7 +8,11 @@ interface UnitButtonProps {
 }
 
 export const UnitButton: React.FC<UnitButtonProps> = ({ fraction, id }) => {
-  const { setStage, playersDetails, setPlayersDetails } = useContext(AppContext);
+
+  const appContext = useContext(AppContext);
+
+  if (!appContext) return null;
+  const { setStage, playersDetails, setPlayersDetails } = appContext;
 
   const onClickHandler = (selectedUnit: string) => {
     setStage('result');

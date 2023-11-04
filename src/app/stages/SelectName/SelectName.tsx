@@ -4,11 +4,14 @@ import { Wrapper } from "@/app/components/Container/Wrapper";
 import { NameInput } from "./NameInput";
 
 export const SelectName = () => {
-  const { gameMode } = useContext(AppContext);
-  const [ isPlayerSet, setIsPlayerSet ] = useState(false);
+  const [isPlayerSet, setIsPlayerSet] = useState(false);
+  
+  const appContext = useContext(AppContext);
+    if (!appContext) return null;
+  const { gameMode } = appContext;
 
   return (
-    <Wrapper title={`${isPlayerSet ? 'Player 2 name:' : 'Player 1 name:'}`}>
+    <Wrapper title={`${isPlayerSet ? "Player 2 name:" : "Player 1 name:"}`}>
       {!isPlayerSet ? (
         <NameInput
           setIsPlayerSet={setIsPlayerSet}
