@@ -43,7 +43,7 @@ export const UnitCard: React.FC<UnitProps> = ({
   const UnitPower = () => {
     return (
       <span
-        className={`text-2xl py-4 text-white px-8 uppercase ${
+        className={`text-2xl py-2 text-white px-8 uppercase ${
           unit === "humans" ? "bg-human" : "bg-starship"
         }`}
       >
@@ -55,7 +55,7 @@ export const UnitCard: React.FC<UnitProps> = ({
   return (
     <CustomCard>
       <UnitScore />
-      <div className="flex flex-col items-center justify-between">
+      <div className="flex w-full flex-col items-center justify-between">
         <UnitTitle />
         {isReady ? (
           <UnitPower />

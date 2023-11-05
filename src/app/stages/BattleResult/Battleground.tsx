@@ -116,6 +116,7 @@ export const Battleground = () => {
     return (
       <div className={"flex flex-col md:flex-row mt-10 gap-8"}>
         {playersDetails.map((player: any, index: number) => (
+          <>
           <UnitCard
             key={index}
             score={player.score}
@@ -126,6 +127,8 @@ export const Battleground = () => {
               player.unit === "humans" ? `mass: ${person}` : `crew: ${starship}`
             }
           />
+          {index === 0 ? <span className={'text-4xl self-center'}>VS</span> : null}
+          </>
         ))}
       </div>
     );
@@ -154,7 +157,7 @@ export const Battleground = () => {
 
   const ContentWrapper = () => {
     return (
-      <div className={"flex flex-col my-5"}>
+      <div className={"flex flex-col my-5 w-full"}>
         <InfoHeading />
         <UnitsWrapper />
         <FightButtonWrapper />
