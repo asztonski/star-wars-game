@@ -1,4 +1,4 @@
-import { CustomCard } from "../../components/Card/CustomCard";
+import { CustomCard } from "./CustomCard";
 
 interface UnitProps {
   unit: string;
@@ -8,7 +8,7 @@ interface UnitProps {
   isReady: boolean;
 }
 
-export const UnitDetails: React.FC<UnitProps> = ({
+export const UnitCard: React.FC<UnitProps> = ({
   unit,
   player,
   score,
@@ -50,7 +50,7 @@ export const UnitDetails: React.FC<UnitProps> = ({
         {power}
       </span>
     );
-  };
+};
 
   return (
     <CustomCard>

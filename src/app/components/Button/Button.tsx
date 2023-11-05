@@ -17,7 +17,7 @@ export const Button: React.FC<ButtonProps> = ({
   return (
     <button
       role="button"
-      data-testid={testId}
+      data-testid="button"
       onClick={onClick}
       className={`ease-[ease] duration-[0.34s] rounded-xl hover:scale-110 ${
         primaryStyle ? "bg-primary" : ""

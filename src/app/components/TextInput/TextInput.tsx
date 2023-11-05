@@ -3,13 +3,13 @@ import { AppContext } from "@/app/context/AppContext";
 import { CustomCard } from "@/app/components/Card/CustomCard";
 import { Button } from "@/app/components/Button/Button";
 
-interface NameInputProps {
+interface TextInputProps {
   placeHolder: string;
   id: string;
   setIsPlayerSet: (isSet: boolean) => void;
 }
 
-export const NameInput: React.FC<NameInputProps> = ({
+export const TextInput: React.FC<TextInputProps> = ({
   placeHolder,
   id,
   setIsPlayerSet,
@@ -52,13 +52,14 @@ export const NameInput: React.FC<NameInputProps> = ({
 
   return (
     <CustomCard>
-      <div className={"flex flex-col gap-4 w-1/2 items-center"}>
+      <div className={"flex flex-col gap-4 w-full md:w-1/2 items-center"}>
         <input
           className="w-full p-3"
           placeholder={placeHolder}
           type="text"
           value={inputValue}
           onChange={handleInputChange}
+          data-testid="text-input"
         />
         <p className={"text-red-600"}>{error}</p>
         <div className={"w-1/2"}>

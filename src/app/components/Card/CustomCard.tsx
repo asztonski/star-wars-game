@@ -5,7 +5,7 @@ export const CustomCard: React.FC<{ children: ReactNode }> = ({ children }) => {
   return (
     <Card
       className={
-        `bg-secondary p-10 flex justify-center items-center w-full relative`
+        `bg-secondary p-5 flex justify-center items-center w-full relative`
       }
     >
       {children}

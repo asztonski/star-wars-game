@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { AppContext } from "@/app/context/AppContext";
 import { fetchData } from "@/app/helpers/getPowerData";
 import { Wrapper } from "@/app/components/Container/Wrapper";
-import { UnitDetails } from "./UnitDetails";
+import { UnitCard } from "@/app/components/Card/UnitCard";
 import { Button } from "@/app/components/Button/Button";
 
 export const Battleground = () => {
@@ -104,7 +104,7 @@ export const Battleground = () => {
     return (
       <div className={"flex flex-col md:flex-row mt-10 gap-8"}>
         {playersDetails.map((player: any, index: number) => (
-          <UnitDetails
+          <UnitCard
             key={index}
             score={player.score}
             unit={player.unit}
@@ -122,7 +122,7 @@ export const Battleground = () => {
   const ButtonWrapper = () => {
     return (
       <div
-        className={`md-w-1/3 m-auto mt-20 ${loading ? "bounce disabled" : ""}`}
+        className={`md-w-1/3 m-auto mt-5 md:mt-20 ${loading ? "bounce disabled" : ""}`}
       >
         <Button
           primaryStyle
