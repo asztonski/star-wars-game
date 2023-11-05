@@ -1,7 +1,7 @@
 import { Container } from "@mui/material";
 import { ReactNode } from "react";
 
-interface MainContainerProps {
+type MainContainerProps = {
   children: ReactNode,
 }
 

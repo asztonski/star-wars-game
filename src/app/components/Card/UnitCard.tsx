@@ -1,6 +1,6 @@
 import { CustomCard } from "./CustomCard";
 
-interface UnitProps {
+type UnitProps = {
   unit: string;
   player: string;
   score: number;

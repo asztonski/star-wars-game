@@ -13,6 +13,7 @@ export const Battleground = () => {
   const [dataFetched, setDataFetched] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  // Set the winner
   useEffect(() => {
     if (dataFetched) {
       if (person !== null && starship !== null) {
@@ -25,24 +26,14 @@ export const Battleground = () => {
     }
   }, [dataFetched, person, starship]);
 
-  useEffect(() => {
-    if (winner !== null) {
-      if (player1.unit === winner) {
-        player1.score++;
-      }
-      if (player2.unit === winner) {
-        player2.score++;
-      }
-    }
-  }, [winner]);
-
   const appContext = useContext(AppContext);
-    if (!appContext) return null;
+  if (!appContext) return null;
   const { playersDetails, resetGame } = appContext;
 
   const player1 = playersDetails[0];
   const player2 = playersDetails[1];
 
+  // Fetch data
   const fetchDataWithTimeout = async () => {
     setLoading(true);
     setError(null);
@@ -60,24 +51,45 @@ export const Battleground = () => {
       if (person !== null && starship !== null) {
         setPerson(person);
         setStarship(starship);
-        setWinner(null);
+        const newWinner = person > starship ? "humans" : "starships";
+        setWinner(newWinner);
         setDataFetched(true);
+
+        // Update player scores based on the winner
+        if (player1.unit === newWinner) {
+          player1.score++;
+        }
+        if (player2.unit === newWinner) {
+          player2.score++;
+        }
       }
     } catch (error) {
       console.error("Error fetching data:", error);
+      // Custom error message
       setError(
-        "Battleground has been destroyed. Please start battle on another planet."
+        "Battleground has been destroyed. Please start the battle on another planet."
       );
     } finally {
       setLoading(false);
     }
   };
 
-  const handleFightClick = async () => {
-    fetchDataWithTimeout();
+  // DOM components
+
+  const ResetButtonWrapper = () => {
+    
+    const resetGameHandler = () => {
+      resetGame();
+    };
+
+    return (
+      <div className={"absolute bottom-5 right-5"}>
+        <Button secondaryStyle content="New game" onClick={resetGameHandler} />
+      </div>
+    );
   };
 
-  const Title = () => {
+  const InfoHeading = () => {
     return (
       <h4
         className={`uppercase text-5xl text-center ${
@@ -119,10 +131,17 @@ export const Battleground = () => {
     );
   };
 
-  const ButtonWrapper = () => {
+  const FightButtonWrapper = () => {
+
+    const handleFightClick = async () => {
+      fetchDataWithTimeout();
+    };
+
     return (
       <div
-        className={`md-w-1/3 m-auto mt-5 md:mt-20 ${loading ? "bounce disabled" : ""}`}
+        className={`md-w-1/3 m-auto mt-5 md:mt-20 ${
+          loading ? "bounce disabled" : ""
+        }`}
       >
         <Button
           primaryStyle
@@ -133,17 +152,21 @@ export const Battleground = () => {
     );
   };
 
+  const BattlegroundWrapper = () => {
+    return (
+      <div className={"flex flex-col my-5"}>
+        <InfoHeading />
+        <UnitsWrapper />
+        <FightButtonWrapper />
+        {error ? <p className="text-red-600">{error}</p> : null}
+      </div>
+    );
+  };
+
   return (
     <Wrapper title="Battleground">
-      <div className={'absolute bottom-5 right-5'}>
-        <Button secondaryStyle content="New game" onClick={() => resetGame()} />
-      </div>
-      <div className={"flex flex-col my-5"}>
-        <Title />
-        <UnitsWrapper />
-        {error ? <p className="text-red-600">{error}</p> : null}
-        <ButtonWrapper />
-      </div>
+      <BattlegroundWrapper />
+      <ResetButtonWrapper />
     </Wrapper>
   );
 };

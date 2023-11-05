@@ -18,8 +18,5 @@ describe("Content Component", () => {
   test("should have a getContent function based on stage value", () => {
     const getContent = Content().type;
     expect(getContent).toBeDefined();
-
-    // You can add more specific tests for the getContent function based on different stages.
-    // For example, if you expect it to return the correct components for each stage.
   });
 });

@@ -3,7 +3,7 @@ import { AppContext } from "@/app/context/AppContext";
 import { CustomCard } from "@/app/components/Card/CustomCard";
 import { Button } from "@/app/components/Button/Button";
 
-interface TextInputProps {
+type TextInputProps = {
   placeHolder: string;
   id: string;
   setIsPlayerSet: (isSet: boolean) => void;

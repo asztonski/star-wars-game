@@ -6,7 +6,7 @@ type ButtonProps = {
   testId?: string;
 };
 
-// Use the ButtonProps type in your Button component
+
 export const Button: React.FC<ButtonProps> = ({
   onClick,
   content,
