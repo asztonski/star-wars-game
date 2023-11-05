@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { AppContext } from "@/app/context/AppContext";
 import { CustomCard } from "@/app/components/Card/CustomCard";
-import { Button } from "@/app/components/Button/Button";
+import { Button as SubmitButton } from "@/app/components/Button/Button";
 
 type TextInputProps = {
   placeHolder: string;
@@ -18,10 +18,15 @@ export const TextInput: React.FC<TextInputProps> = ({
   const [error, setError] = useState("");
 
   const appContext = useContext(AppContext);
-
-  if (!appContext) return null;
+    if (!appContext) return null;
   const { playersDetails, setPlayersDetails, setStage, gameMode } = appContext;
 
+  // onInputChange
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(event.target.value);
+  };
+
+  // Submit
   const btnHandler = () => {
     const updatedNames = [...playersDetails];
     const isInputEmpty = inputValue.trim() === "";
@@ -46,10 +51,6 @@ export const TextInput: React.FC<TextInputProps> = ({
     } else setError(`Please insert player's name`);
   };
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(event.target.value);
-  };
-
   return (
     <CustomCard>
       <div className={"flex flex-col gap-4 w-full md:w-1/2 items-center"}>
@@ -63,7 +64,7 @@ export const TextInput: React.FC<TextInputProps> = ({
         />
         <p className={"text-red-600"}>{error}</p>
         <div className={"w-1/2"}>
-          <Button content="ok" primaryStyle onClick={btnHandler} />
+          <SubmitButton content="ok" primaryStyle onClick={btnHandler} />
         </div>
       </div>
     </CustomCard>

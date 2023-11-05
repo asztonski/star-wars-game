@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { AppContext } from "@/app/context/AppContext";
-import { Wrapper } from "@/app/components/Container/Wrapper";
+import { Wrapper as NameWrapper } from "@/app/components/Container/Wrapper";
 import { TextInput } from "@/app/components/TextInput/TextInput";
 
 export const SelectName = () => {
@@ -11,7 +11,7 @@ export const SelectName = () => {
   const { gameMode } = appContext;
 
   return (
-    <Wrapper title={`${isPlayerSet ? "Player 2 name:" : "Player 1 name:"}`}>
+    <NameWrapper title={`${isPlayerSet ? "Player 2 name:" : "Player 1 name:"}`}>
       {!isPlayerSet ? (
         <TextInput
           setIsPlayerSet={setIsPlayerSet}
@@ -26,6 +26,6 @@ export const SelectName = () => {
           placeHolder="Player 2 Name"
         />
       ) : null}
-    </Wrapper>
+    </NameWrapper>
   );
 };

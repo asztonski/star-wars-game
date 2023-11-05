@@ -1,5 +1,5 @@
-import { Wrapper } from "@/app/components/Container/Wrapper";
-import { Button } from "@/app/components/Button/Button";
+import { Wrapper as UnitWrapper } from "@/app/components/Container/Wrapper";
+import { Button as UnitButton } from "@/app/components/Button/Button";
 import { useContext } from "react";
 import { AppContext } from "@/app/context/AppContext";
 
@@ -28,15 +28,15 @@ export const SelectUnit = () => {
   };
 
   return (
-    <Wrapper title="Player 1 select your unit">
+    <UnitWrapper title="Player 1 select your unit">
       {unitOptions.map((unit) => (
-        <Button
+        <UnitButton
           key={unit.value}
           secondaryStyle
           onClick={() => onClickHandler(unit.value)}
           content={unit.label}
         />
       ))}
-    </Wrapper>
+    </UnitWrapper>
   );
 };

@@ -1,5 +1,5 @@
-import { Wrapper } from "@/app/components/Container/Wrapper";
-import { Button } from "@/app/components/Button/Button";
+import { Wrapper as ModeWrapper } from "@/app/components/Container/Wrapper";
+import { Button as ModeButton } from "@/app/components/Button/Button";
 import { useContext } from "react";
 import { AppContext } from "@/app/context/AppContext";
 
@@ -23,9 +23,9 @@ export const SelectMode = () => {
   };
 
   return (
-    <Wrapper title="Select game mode" data-testid="wrapper-component">
+    <ModeWrapper title="Select game mode" data-testid="wrapper-component">
       {gameModes.map((mode) => (
-        <Button
+        <ModeButton
           key={mode.value}
           secondaryStyle
           onClick={() => setGameModeHandler(mode.value)}
@@ -33,6 +33,6 @@ export const SelectMode = () => {
           content={mode.label}
          />
       ))}
-    </Wrapper>
+    </ModeWrapper>
   );
 };

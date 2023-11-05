@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "@/app/context/AppContext";
 import { fetchData } from "@/app/helpers/getPowerData";
-import { Wrapper } from "@/app/components/Container/Wrapper";
+import { Wrapper as BattlegroundWrapper } from "@/app/components/Container/Wrapper";
 import { UnitCard } from "@/app/components/Card/UnitCard";
 import { Button } from "@/app/components/Button/Button";
 
@@ -152,7 +152,7 @@ export const Battleground = () => {
     );
   };
 
-  const BattlegroundWrapper = () => {
+  const ContentWrapper = () => {
     return (
       <div className={"flex flex-col my-5"}>
         <InfoHeading />
@@ -164,9 +164,9 @@ export const Battleground = () => {
   };
 
   return (
-    <Wrapper title="Battleground">
-      <BattlegroundWrapper />
+    <BattlegroundWrapper title="Battleground">
+      <ContentWrapper />
       <ResetButtonWrapper />
-    </Wrapper>
+    </BattlegroundWrapper>
   );
 };
