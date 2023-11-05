@@ -29,15 +29,9 @@ export const SelectMode = () => {
           key={mode.value}
           secondaryStyle
           onClick={() => setGameModeHandler(mode.value)}
-        >
-          <h2
-            className={
-              "text-5xl text-primary uppercase italic tracking-widest text-center"
-            }
-          >
-            {mode.label}
-          </h2>
-        </Button>
+          testId="button"
+          content={mode.label}
+         />
       ))}
     </Wrapper>
   );

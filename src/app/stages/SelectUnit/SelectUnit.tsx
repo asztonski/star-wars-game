@@ -34,15 +34,8 @@ export const SelectUnit = () => {
           key={unit.value}
           secondaryStyle
           onClick={() => onClickHandler(unit.value)}
-        >
-          <h2
-            className={
-              "text-5xl text-primary uppercase italic tracking-widest text-center"
-            }
-          >
-            {unit.label}
-          </h2>
-        </Button>
+          content={unit.label}
+        />
       ))}
     </Wrapper>
   );

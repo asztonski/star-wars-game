@@ -62,9 +62,7 @@ export const NameInput: React.FC<NameInputProps> = ({
         />
         <p className={"text-red-600"}>{error}</p>
         <div className={"w-1/2"}>
-          <Button primaryStyle onClick={btnHandler}>
-            Ok
-          </Button>
+          <Button content="ok" primaryStyle onClick={btnHandler} />
         </div>
       </div>
     </CustomCard>
